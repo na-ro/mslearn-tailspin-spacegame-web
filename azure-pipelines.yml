@@ -72,6 +72,15 @@ steps:
     arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
     zipAfterPublish: true #specifies to add the built results to a .zip file
 
+#calling a templates
+- template: templates/build.yml #calling a template once for the debug configuration
+  parameters: 
+    buildConfiguration: 'Debug'
+
+- template: templates/build.yml #calling a second time for the release configuration
+  parameters:
+    buildConfiguration: 'Release'
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   condition: succeeded() #run the task ONLY when the previous task succeeds

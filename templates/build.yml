@@ -1,0 +1,28 @@
+parameters: #variables
+  buildConfiguration: 'Release' #variable 1
+
+steps: 
+- task: DotNetCoreCLI@2
+  displayName: 'Build the project - ${{ parameters.buildConfiguration }}'
+  inputs:
+    command: 'build'
+    arguments: '--no-restore --configuration ${{ parameters.buildConfiguration }}'
+    projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publish the project - ${{ parameters.buildConfiguration }}'
+  inputs:
+    command: 'publish'
+    projects: '**/*.csproj'
+    publishWebProjects: false
+    arguments: '--no-build --configuration ${{ parameters.buildConfiguration }} --output $(Build.ArtifactStagingDirectory)/${{ parameters.buildConfiguration }}'
+    zipAfterPublish: true
+
+# Summary: These tasks look like the ones you defined earlier to build and publish 
+#  the app. But in a template, you work with input parameters differently than you 
+#  work with normal variables. Here are two differences:
+#    In a template file, use the parameters section instead of variables to 
+#      define inputs.
+#    In a template file, use ${{ }} syntax instead of $() to read a parameter's 
+#      value. When you read a parameter's value, you'll include the parameters 
+#      section in its name. For example, ${{ parameters.buildConfiguration }}.
