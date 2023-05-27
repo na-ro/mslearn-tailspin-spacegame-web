@@ -3,16 +3,17 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-trigger:
-- main
+trigger: #used to automatically run a pipeline
+- main #CI trigger - cause a pipeline to run when an update is pushed to the specified branches
 
-pool:
-  #vmImage: ubuntu-latest #Replacing this text
-  name: Default #Replaced to this ^^
+pool: #Agent pool - builds or deploys the code
+#An agent is an installable software that runs one build or deployment job at a time. 
+  name: Default 
 
-variables:
-  buildConfiguration: 'Release'
+variables: #"class"
+  buildConfiguration: 'Release' #attribute
 
+#stages->jobs->steps 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
