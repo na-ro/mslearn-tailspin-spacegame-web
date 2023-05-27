@@ -5,7 +5,7 @@
 
 trigger:
 #- main #Changed to:
-- '*'
+- '*' #'Wildcard:' * to match zero or more characters. Quotes are required when the string contains special or reserved characters where the value can be misinterpreted as a data type (like ':' or '*')
 
 pool:
   #vmImage: ubuntu-latest #Replacing this text
