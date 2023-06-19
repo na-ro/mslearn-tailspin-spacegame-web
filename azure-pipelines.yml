@@ -74,8 +74,8 @@ steps:
 
 #calling a templates
 - template: templates/build.yml #calling a template once for the debug configuration
-  parameters: 
-    buildConfiguration: 'Debug'
+  #parameters: 
+    #buildConfiguration: 'Debug'
 
 - template: templates/build.yml #calling a second time for the release configuration
   parameters:
